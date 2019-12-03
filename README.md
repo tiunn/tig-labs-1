@@ -1,6 +1,6 @@
 # Telegraf, InfluxDB, Grafana Labs
 
-## Lab videos: [https://www.youtube.com/playlist?list=PLGmrb_nBLueKbk3tV5gwI7FxmXwBpGak0](https://www.youtube.com/playlist?list=PLGmrb_nBLueKbk3tV5gwI7FxmXwBpGak0)
+## Lab videos: [YouTube Playlist](https://www.youtube.com/playlist?list=PLGmrb_nBLueKbk3tV5gwI7FxmXwBpGak0)
 
 ## Lab 1: Install Docker
 
