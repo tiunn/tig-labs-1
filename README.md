@@ -137,6 +137,7 @@ Press Ctrl-C to exit the "grafana" container.
 `docker run -dit --restart always -p 3000:3000 --name=grafana --net=influxdb -v grafana-data:/var/lib/grafana -v /etc/grafana/conf:/etc/grafana/conf grafana/grafana:6.4.4`
 
 Start web browser, go to "http://localhost:3000"
+
 Use "admin/admin" as the first time username and password and then change the password.
 
 ## Lab 10: Add the first datasource, dashboard and panel in Grafana
