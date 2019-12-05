@@ -112,7 +112,7 @@ Edit the following parameters:
 
 `show measurements;`
 
-CHeck if the data has been inserted into the database.
+Check if the data has been inserted into the database.
 
 ## Lab 8: Retreive Grafana configuration
 
@@ -122,19 +122,29 @@ CHeck if the data has been inserted into the database.
 
 Start a new terminal
 
-`docker cp grafana:usr/share/grafana/conf conf`
+`mkdir grafana-conf`
 
-`docker cp grafana:etc/grafana/grafana.ini conf`
+`cd grafana-conf`
+
+`docker cp grafana:etc/grafana/grafana.ini .`
+
+`docker cp grafana:etc/grafana/ldap.toml .`
+
+`docker cp grafana:etc/grafana/provisioning .`
+
+`sudo useradd -rs /bin/false grafana`
+
+`sudo mkdir -p /etc/grafana`
+
+`sudo cp -R * /etc/grafana`
+
+`sudo chown -R grafana:grafana /etc/grafana`
 
 Press Ctrl-C to exit the "grafana" container.
 
 ## Lab 9: Run Grafana
 
-`sudo mkdir -p /etc/grafana`
-
-`sudo cp -R conf /etc/grafana`
-
-`docker run -dit --restart always -p 3000:3000 --name=grafana --net=influxdb -v grafana-data:/var/lib/grafana -v /etc/grafana/conf:/etc/grafana/conf grafana/grafana:6.4.4`
+`docker run -dit --restart always -p 3000:3000 --name=grafana --net=influxdb -v grafana-data:/var/lib/grafana -v /etc/grafana:/etc/grafana grafana/grafana:6.4.4`
 
 Start web browser, go to "http://localhost:3000"
 
@@ -158,10 +168,42 @@ Please see the video for the detail.
 
 `docker container rename grafana grafana-6.4.4`
 
-`docker run -dit --restart always -p 3000:3000 --name=grafana --net=influxdb -v grafana-data:/var/lib/grafana -v /etc/grafana/conf:/etc/grafana/conf grafana/grafana`
+`docker run -dit --restart always -p 3000:3000 --name=grafana --net=influxdb -v grafana-data:/var/lib/grafana -v /etc/grafana:/etc/grafana grafana/grafana`
 
 Only delete containers and images after making sure the new container works as expect.
 
 `docker rmi grafana/grafana:6.4.4`
 
 `docker rm grafana-6.4.4`
+
+## Lab 14: Run Grafana image renderer
+
+`docker run -dit -p 8081:8081 --name=grafana-image --net=influxdb grafana/grafana-image-renderer:latest`
+
+## Lab 15: Create Google Storage Bucket
+
+`sudo mkdir -p /etc/grafana/key`
+
+`sudo cp *.json /etc/grafana/key`
+
+## Lab 16: Edit Grafana.ini setting to support image rendering
+
+`sudo vi /etc/grafana/grafana.ini`
+
+<code>
+
+        [external_image_storage]
+        provider = gcs
+
+        [external_image_storage.gcs]
+        key_file = /etc/grafana/key/ringed-XXXXXXX.json
+        bucket = your-bucket-name
+
+        [rendering]
+        server_url = http://grafana-image:8081/render
+        callback_url = http://grafana:3000/
+</code>
+
+Restart containers:grafana, grafana-image
+
+## Lab 17: Add Email notification channel
