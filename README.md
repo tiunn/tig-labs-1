@@ -189,7 +189,8 @@ Only delete containers and images after making sure the new container works as e
 ## Lab 16: Edit Grafana.ini setting to support image rendering
 
 `sudo vi /etc/grafana/grafana.ini`
-<code>
+
+```
         [external_image_storage]
         provider = gcs
 
@@ -200,7 +201,8 @@ Only delete containers and images after making sure the new container works as e
         [rendering]
         server_url = http://grafana-image:8081/render
         callback_url = http://grafana:3000/
-</code>
+```
+
 Restart containers:grafana, grafana-image
 
 ## Lab 17: Add Email notification channel
