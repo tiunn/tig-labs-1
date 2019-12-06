@@ -168,7 +168,7 @@ Please see the video for the detail.
 
 `docker container rename grafana grafana-6.4.4`
 
-`docker run -dit --restart always -p 3000:3000 --name=grafana --net=influxdb -v grafana-data:/var/lib/grafana -v /etc/grafana:/etc/grafana grafana/grafana`
+`docker run -dit --restart always -p 3000:3000 --name=grafana --net=influxdb -v grafana-data:/var/lib/grafana -v /etc/grafana:/etc/grafana grafana/grafana:x.x.x`
 
 Only delete containers and images after making sure the new container works as expect.
 
