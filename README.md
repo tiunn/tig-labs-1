@@ -104,6 +104,8 @@ Edit the following parameters:
 
 `sudo systemctl status telegraf`
 
+`sudo systemctl enable telegraf`
+
 `docker exec -it influxdb bash`
 
 `influx -username admin -password influxdb`
