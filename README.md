@@ -110,6 +110,8 @@ Edit the following parameters:
 
 `show databases;`
 
+`use telegraf;`
+
 `show measurements;`
 
 Check if the data has been inserted into the database.
