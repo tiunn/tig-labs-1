@@ -8,7 +8,7 @@
 
 `sudo apt -y upgrade`
 
-`sudo apt install docker`
+[Install Docker for Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 
 ## Lab 2: Docker nonroot access and start on boot
 
