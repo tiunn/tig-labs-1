@@ -69,6 +69,10 @@ You should see the successful response.
 
 `telegraf -sample-config -input-filter cpu:mem:disk:kernel:processes:swap:system:net:ping -output-filter influxdb > telegraf.conf`
 
+OR
+
+`docker run --rm telegraf -sample-config -input-filter cpu:mem:disk:kernel:processes:swap:system:net:ping -output-filter influxdb | sudo tee ../telegraf/telegraf.conf > /dev/null`
+
 ## Lab 5: Copy Telegraf configuration file to /etc
 
 `sudo cp telegraf.conf /etc/telegraf/`
@@ -122,7 +126,7 @@ Check if the data has been inserted into the database.
 
 `docker volume create grafana-data`
 
-`docker run --rm --name=grafana grafana/grafana:6.4.4`
+`docker run -d --name=grafana grafana/grafana:6.4.4`
 
 Start a new terminal
 
